@@ -1,8 +1,11 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
-import { EventCostOptionEtity } from 'src/event-cost-options/entities/event-cost-option.entity';
-import { EventInfoEntity } from 'src/event-info/entities/event-info.entity';
-import { EventTagEntity } from 'src/event-tag/entities/event-tag.entity';
-import { EventImageEntity } from 'src/event_images/entities/event_image.entity';
+import { EventPlaceCostOptionEntity } from 'src/event_place_cost_options/entities/event_place_cost_option.entity';
+import { EventPlaceTagEntity } from 'src/event_place_tags/entities/event_place_tag.entity';
+import { ImageEntity } from 'src/images/entities/image.entity';
+import { InfoEntity } from 'src/info/entities/info.entity';
+import { InterestingCollectionSelectionEntity } from 'src/interesting_collection_selections/entities/interesting_collection_selections.entity';
+import { EventDirections } from '../directions';
+
 import {
   Column,
   Entity,
@@ -31,35 +34,51 @@ export class EventEntity {
   views: number;
 
   @Field({ nullable: true })
-  @Column({ nullable: true })
+  @Column({ nullable: true, unique: true })
   preview?: string;
 
-  @Field({ nullable: true })
-  @Column({ default: true, nullable: true })
+  @Field({ defaultValue: true })
+  @Column({ default: true })
   publish: boolean;
 
-  @OneToMany(() => EventImageEntity, (image) => image.event, {
+  @Field({ defaultValue: false })
+  @Column({ type: 'boolean', default: false })
+  recommendation: boolean;
+
+  @Field({ defaultValue: 'events' })
+  @Column({ default: 'events' })
+  categry: string;
+
+  @Field(() => EventDirections)
+  @Column({ type: 'enum', enum: EventDirections })
+  direction: EventDirections;
+
+  @Field(() => [ImageEntity])
+  @OneToMany(() => ImageEntity, (image) => image.event, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @Field(() => [EventImageEntity])
-  images: EventImageEntity[];
+  images: ImageEntity[];
 
-  @OneToOne(() => EventInfoEntity, (info) => info.event, {
+  @Field(() => InfoEntity)
+  @OneToOne(() => InfoEntity, (info) => info.event, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @Field(() => EventInfoEntity)
-  info: EventInfoEntity;
+  info: InfoEntity[];
 
-  @OneToMany(() => EventTagEntity, (eventTag) => eventTag.event)
-  @Field(() => [EventTagEntity])
-  eventTag: EventTagEntity[];
+  @Field(() => [EventPlaceTagEntity])
+  @OneToMany(() => EventPlaceTagEntity, (eventTag) => eventTag.event)
+  tags: EventPlaceTagEntity[];
 
+  @Field(() => [EventPlaceCostOptionEntity])
+  @OneToMany(() => EventPlaceCostOptionEntity, (costOption) => costOption.event)
+  costOption: EventPlaceCostOptionEntity[];
+
+  @Field(() => [InterestingCollectionSelectionEntity])
   @OneToMany(
-    () => EventCostOptionEtity,
-    (eventCostOption) => eventCostOption.event,
+    () => InterestingCollectionSelectionEntity,
+    (interesting) => interesting.event,
   )
-  @Field(() => [EventCostOptionEtity])
-  eventCostOption: EventCostOptionEtity[];
+  interesting: InterestingCollectionSelectionEntity;
 }

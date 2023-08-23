@@ -4,6 +4,7 @@ import { UpdateEventInput } from './dto/update-event.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EventEntity } from './entities/event.entity';
 import { Repository } from 'typeorm';
+import { v4 as uuidV4 } from 'uuid';
 
 @Injectable()
 export class EventService {
@@ -13,7 +14,8 @@ export class EventService {
   ) {}
 
   async create(createEventInput: CreateEventInput) {
-    return await this.EventRepository.save({ ...createEventInput });
+    const preview = `${uuidV4()}.jpeg`;
+    return await this.EventRepository.save({ ...createEventInput, preview });
   }
 
   async findAll() {
@@ -21,8 +23,8 @@ export class EventService {
       relations: {
         images: true,
         info: true,
-        eventTag: { tag: true },
-        eventCostOption: { costOption: true },
+        tags: { tags: true },
+        costOption: { costOption: true },
       },
     });
   }
@@ -33,8 +35,8 @@ export class EventService {
       relations: {
         images: true,
         info: true,
-        eventTag: { tag: true },
-        eventCostOption: { costOption: true },
+        tags: { tags: true },
+        costOption: { costOption: true },
       },
     });
   }

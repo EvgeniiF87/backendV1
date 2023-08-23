@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { EventTagEntity } from 'src/event-tag/entities/event-tag.entity';
+import { EventPlaceTagEntity } from 'src/event_place_tags/entities/event_place_tag.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
@@ -13,7 +13,7 @@ export class TagEntity {
   @Column({ unique: true })
   name: string;
 
-  @OneToMany(() => EventTagEntity, (eventTag) => eventTag.tag)
-  @Field(() => [EventTagEntity])
-  eventTag: EventTagEntity[];
+  @Field(() => [EventPlaceTagEntity])
+  @OneToMany(() => EventPlaceTagEntity, (eventPlaceTag) => eventPlaceTag.tags)
+  tags: EventPlaceTagEntity[];
 }

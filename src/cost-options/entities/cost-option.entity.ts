@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { EventCostOptionEtity } from 'src/event-cost-options/entities/event-cost-option.entity';
+import { EventPlaceCostOptionEntity } from 'src/event_place_cost_options/entities/event_place_cost_option.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
@@ -9,14 +9,14 @@ export class CostOptionEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
   @Field()
+  @Column({ unique: true })
   name: string;
 
+  @Field(() => [EventPlaceCostOptionEntity])
   @OneToMany(
-    () => EventCostOptionEtity,
-    (eventCostOption) => eventCostOption.costOption,
+    () => EventPlaceCostOptionEntity,
+    (eventPlaceCostOption) => eventPlaceCostOption.costOption,
   )
-  @Field(() => [EventCostOptionEtity])
-  eventCostOption: EventCostOptionEtity[];
+  cost: EventPlaceCostOptionEntity[];
 }

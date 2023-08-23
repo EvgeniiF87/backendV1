@@ -1,0 +1,50 @@
+import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { InterestingCategorySelectEntity } from 'src/interesting_category_select/entities/interesting_category_select.entity';
+import { InterestingCollectionSelectionEntity } from 'src/interesting_collection_selections/entities/interesting_collection_selections.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+@ObjectType()
+@Entity('interesting_collections')
+export class InterestingCollectionEntity {
+  @Field(() => ID)
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Field()
+  @Column()
+  title: string;
+
+  @Field()
+  @Column()
+  img: string;
+
+  @Field({ defaultValue: 0 })
+  @Column({ default: 0 })
+  views?: number;
+
+  @Field(() => Date, { nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
+  existTimeStart?: Date;
+
+  @Field(() => Date, { nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
+  existTimeEnd?: Date;
+
+  @Field(() => Date, { nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
+  whenStartToShow?: Date;
+
+  @Field(() => [InterestingCollectionSelectionEntity])
+  @OneToMany(
+    () => InterestingCollectionSelectionEntity,
+    (collection) => collection.ineresting,
+  )
+  collection: InterestingCollectionSelectionEntity[];
+
+  @Field(() => [InterestingCategorySelectEntity])
+  @OneToMany(
+    () => InterestingCategorySelectEntity,
+    (category) => category.interesting,
+  )
+  category: InterestingCategorySelectEntity[];
+}

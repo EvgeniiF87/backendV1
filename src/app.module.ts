@@ -5,12 +5,17 @@ import { UserModule } from './user/user.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { EventModule } from './event/event.module';
-import { EventImagesModule } from './event_images/event_images.module';
-import { EventInfoModule } from './event-info/event-info.module';
 import { TagModule } from './tag/tag.module';
-import { EventTagModule } from './event-tag/event-tag.module';
 import { CostOptionsModule } from './cost-options/cost-options.module';
-import { EventCostOptionsModule } from './event-cost-options/event-cost-options.module';
+import { ImagesModule } from './images/images.module';
+import { PlaceModule } from './place/place.module';
+import { InfoModule } from './info/info.module';
+import { EventPlaceTagsModule } from './event_place_tags/event_place_tags.module';
+import { EventPlaceCostOptionsModule } from './event_place_cost_options/event_place_cost_options.module';
+import { InterestingCollectionModule } from './interesting_collection/interesting_collection.module';
+import { InterestingCollectionSelectionsModule } from './interesting_collection_selections/interesting_collection_selections.module';
+import { InterestingCategoriesModule } from './interesting_categories/interesting_categories.module';
+import { InterestingCategorySelectModule } from './interesting_category_select/interesting_category_select.module';
 
 @Module({
   imports: [
@@ -38,12 +43,17 @@ import { EventCostOptionsModule } from './event-cost-options/event-cost-options.
     }),
     UserModule,
     EventModule,
-    EventImagesModule,
-    EventInfoModule,
     TagModule,
-    EventTagModule,
     CostOptionsModule,
-    EventCostOptionsModule,
+    ImagesModule,
+    PlaceModule,
+    InfoModule,
+    EventPlaceTagsModule,
+    EventPlaceCostOptionsModule,
+    InterestingCollectionModule,
+    InterestingCollectionSelectionsModule,
+    InterestingCategoriesModule,
+    InterestingCategorySelectModule,
   ],
 })
 export class AppModule {}

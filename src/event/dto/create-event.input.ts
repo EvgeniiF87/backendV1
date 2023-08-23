@@ -1,4 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
+import { EventDirections } from '../directions';
 
 @InputType()
 export class CreateEventInput {
@@ -8,9 +9,12 @@ export class CreateEventInput {
   @Field()
   desc: string;
 
-  @Field()
-  preview: string;
-
   @Field({ defaultValue: true })
-  publish: boolean;
+  publish?: boolean;
+
+  @Field({ defaultValue: false })
+  recommendation?: boolean;
+
+  @Field(() => EventDirections)
+  direction: EventDirections;
 }
