@@ -20,7 +20,9 @@ export class InterestingCollectionResolver {
     );
   }
 
-  @Query(() => [InterestingCollectionEntity], { name: 'interestingCollection' })
+  @Query(() => [InterestingCollectionEntity], {
+    name: 'interestingCollections',
+  })
   findAll() {
     return this.interestingCollectionService.findAll();
   }

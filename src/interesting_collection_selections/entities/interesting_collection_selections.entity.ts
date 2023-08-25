@@ -11,18 +11,18 @@ export class InterestingCollectionSelectionEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field(() => [InterestingCollectionEntity])
+  @Field(() => InterestingCollectionEntity)
   @ManyToOne(
     () => InterestingCollectionEntity,
     (interesting) => interesting.collection,
   )
-  ineresting: InterestingCollectionEntity;
+  interesting: InterestingCollectionEntity;
 
   @Field(() => Int, { nullable: true })
   @Column({ nullable: true })
-  inerestingId: number;
+  interestingId: number;
 
-  @Field(() => [EventEntity])
+  @Field(() => EventEntity)
   @ManyToOne(() => EventEntity, (event) => event.interesting)
   event: EventEntity;
 
@@ -30,7 +30,7 @@ export class InterestingCollectionSelectionEntity {
   @Column({ nullable: true })
   eventId?: number;
 
-  @Field(() => [PlaceEntity])
+  @Field(() => PlaceEntity)
   @ManyToOne(() => PlaceEntity, (place) => place.interesting)
   place: PlaceEntity;
 

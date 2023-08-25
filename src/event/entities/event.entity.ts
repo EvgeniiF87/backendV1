@@ -80,5 +80,5 @@ export class EventEntity {
     () => InterestingCollectionSelectionEntity,
     (interesting) => interesting.event,
   )
-  interesting: InterestingCollectionSelectionEntity;
+  interesting: InterestingCollectionSelectionEntity[];
 }

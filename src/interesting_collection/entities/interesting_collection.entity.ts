@@ -37,7 +37,7 @@ export class InterestingCollectionEntity {
   @Field(() => [InterestingCollectionSelectionEntity])
   @OneToMany(
     () => InterestingCollectionSelectionEntity,
-    (collection) => collection.ineresting,
+    (collection) => collection.interesting,
   )
   collection: InterestingCollectionSelectionEntity[];
 
