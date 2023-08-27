@@ -14,9 +14,9 @@ export class InterestingCollectionEntity {
   @Column()
   title: string;
 
-  @Field()
-  @Column()
-  img: string;
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  img?: string;
 
   @Field({ defaultValue: 0 })
   @Column({ default: 0 })

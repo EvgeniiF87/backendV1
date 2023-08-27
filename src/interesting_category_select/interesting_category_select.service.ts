@@ -1,26 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import { CreateInterestingCategorySelectInput } from './dto/create-interesting_category_select.input';
 import { UpdateInterestingCategorySelectInput } from './dto/update-interesting_category_select.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { InterestingCategorySelectEntity } from './entities/interesting_category_select.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class InterestingCategorySelectService {
-  create(createInterestingCategorySelectInput: CreateInterestingCategorySelectInput) {
-    return 'This action adds a new interestingCategorySelect';
+  constructor(
+    @InjectRepository(InterestingCategorySelectEntity)
+    private readonly InterestingCategorySelectRepository: Repository<InterestingCategorySelectEntity>,
+  ) {}
+
+  async create(
+    createInterestingCategorySelectInput: CreateInterestingCategorySelectInput,
+  ) {
+    return await this.InterestingCategorySelectRepository.create({
+      ...createInterestingCategorySelectInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all interestingCategorySelect`;
+  async findAll() {
+    return await this.InterestingCategorySelectRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} interestingCategorySelect`;
+  async findOne(id: number) {
+    return await this.InterestingCategorySelectRepository.findOneBy({ id });
   }
 
-  update(id: number, updateInterestingCategorySelectInput: UpdateInterestingCategorySelectInput) {
-    return `This action updates a #${id} interestingCategorySelect`;
+  async update(
+    id: number,
+    updateInterestingCategorySelectInput: UpdateInterestingCategorySelectInput,
+  ) {
+    return await this.InterestingCategorySelectRepository.update(
+      { id },
+      { ...updateInterestingCategorySelectInput },
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} interestingCategorySelect`;
+  async remove(id: number) {
+    return await this.InterestingCategorySelectRepository.delete({ id });
   }
 }

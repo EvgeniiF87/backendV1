@@ -6,6 +6,6 @@ import { CostOptionEntity } from './entities/cost-option.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CostOptionEntity])],
-  //providers: [CostOptionsResolver, CostOptionsService],
+  providers: [CostOptionsResolver, CostOptionsService],
 })
 export class CostOptionsModule {}

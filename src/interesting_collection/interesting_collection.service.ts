@@ -12,8 +12,12 @@ export class InterestingCollectionService {
     private readonly InterestingCollectionRepository: Repository<InterestingCollectionEntity>,
   ) {}
 
-  create(createInterestingCollectionInput: CreateInterestingCollectionInput) {
-    return 'This action adderestingCollection';
+  async create(
+    createInterestingCollectionInput: CreateInterestingCollectionInput,
+  ) {
+    return await this.InterestingCollectionRepository.create({
+      ...createInterestingCollectionInput,
+    });
   }
 
   async findAll() {
@@ -39,14 +43,17 @@ export class InterestingCollectionService {
     });
   }
 
-  update(
+  async update(
     id: number,
     updateInterestingCollectionInput: UpdateInterestingCollectionInput,
   ) {
-    return `This action updates a #${id} interestingCollection`;
+    return await this.InterestingCollectionRepository.update(
+      { id },
+      { ...updateInterestingCollectionInput },
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} interestingCollection`;
+  async remove(id: number) {
+    return await this.InterestingCollectionRepository.delete({ id });
   }
 }

@@ -73,7 +73,7 @@ export class PlaceEntity {
   @Field(() => [InterestingCollectionSelectionEntity])
   @OneToMany(
     () => InterestingCollectionSelectionEntity,
-    (interesting) => interesting.event,
+    (interesting) => interesting.place,
   )
   interesting: InterestingCollectionSelectionEntity;
 }

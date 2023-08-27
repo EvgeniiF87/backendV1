@@ -16,23 +16,23 @@ export class InterestingCollectionSelectionEntity {
     () => InterestingCollectionEntity,
     (interesting) => interesting.collection,
   )
-  interesting: InterestingCollectionEntity;
+  interesting?: InterestingCollectionEntity;
 
   @Field(() => Int, { nullable: true })
   @Column({ nullable: true })
   interestingId: number;
 
-  @Field(() => EventEntity)
+  @Field(() => EventEntity, { nullable: true })
   @ManyToOne(() => EventEntity, (event) => event.interesting)
-  event: EventEntity;
+  event?: EventEntity;
 
   @Field(() => Int, { nullable: true })
   @Column({ nullable: true })
   eventId?: number;
 
-  @Field(() => PlaceEntity)
+  @Field(() => PlaceEntity, { nullable: true })
   @ManyToOne(() => PlaceEntity, (place) => place.interesting)
-  place: PlaceEntity;
+  place?: PlaceEntity;
 
   @Field(() => Int, { nullable: true })
   @Column({ nullable: true })

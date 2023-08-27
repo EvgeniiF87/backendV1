@@ -1,0 +1,161 @@
+mutation createEvent($event: CreateEventInput!) {
+  createEvent(createEventInput: $event) {
+    id
+    title
+    desc
+    views
+    preview
+    publish
+    recommendation
+    direction
+    categry
+  }
+}
+
+{
+  "event": {
+    "title": "event title 4",
+    "desc": "event desc 4",
+    "direction": "Education"
+  }
+}
+
+mutation createPlace($newPlace: CreatePlaceInput!) {
+  createPlace(createPlaceInput: $newPlace) {
+    id
+    title
+    desc
+    preview
+    views
+    categry
+    direction
+  }
+}
+
+{
+  "newPlace": {
+    "title": "place title 1",
+    "desc": "place desc 1",
+    "preview": "place preview 1",
+    "direction": "Parks"
+  }
+}
+
+mutation createInfo($info: CreateInfoInput!) {
+  createInfo(createInfoInput: $info) {
+    id
+    adress
+    call_back
+    longitude
+    latitude
+    existTimeStart
+    existTimeEnd
+    eventId
+    placeId
+  }
+}
+
+{
+  "info": {
+    "adress": "adress event 2",
+    "longitude": "20.8748279230",
+    "latitude": "-45.8748938947",
+    "existTimeStart": "2023-09-01",
+    "existTimeEnd": "2023-09-30",
+    "call_back": false,
+    "eventId": 2
+  }
+}
+
+query{
+  events{
+    title
+    desc
+  }
+}
+
+query($id: Int!){
+  event(id: $id) {
+    title
+    desc
+    info{
+      adress
+      latitude
+      longitude
+      existTimeStart
+      existTimeEnd
+    }
+    images{
+      name
+    }
+    tags{
+      tags{
+        name
+      }
+    }costOption{
+      costOption{
+        name
+      }
+    }
+  }
+}
+
+{
+  "id": 1
+}
+
+query{
+  places{
+    id
+    title
+    desc
+    categry
+    direction
+    views
+    images{
+      name
+    }
+    tags {
+      tags{
+        name
+      }
+    }
+  }
+}
+
+query($id: Int!) {
+  place(id: $id) {
+    id
+    title
+    desc
+    direction
+    views
+    tags {
+      tags {
+        name
+      }
+    }
+    info {
+      adress
+      latitude
+      longitude
+    }
+  }
+}
+
+{
+  "id": 1
+}
+
+mutation($newInterestingSC: CreateInterestingCollectionSelectionInput!) {
+  createInterestingCollectionSelection(createInterestingCollectionSelectionInput: $newInterestingSC) {
+    id
+  }
+}
+{
+  "newInterestingSC": {
+    "inerestingId": 1,
+    "eventId": [1,2,3],
+    "typeEntity": "Event"
+  }
+}

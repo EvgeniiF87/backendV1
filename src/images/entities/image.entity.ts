@@ -11,8 +11,8 @@ export class ImageEntity {
   id: number;
 
   @Field()
-  @Column()
-  name: string;
+  @Column({ unique: true })
+  path?: string;
 
   @Field(() => [PlaceEntity])
   @ManyToOne(() => PlaceEntity, (place) => place.images, {

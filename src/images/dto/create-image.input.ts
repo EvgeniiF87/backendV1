@@ -3,7 +3,7 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 @InputType()
 export class CreateImageInput {
   @Field()
-  name: string;
+  path?: string;
 
   @Field(() => Int, { nullable: true })
   placeId?: number;

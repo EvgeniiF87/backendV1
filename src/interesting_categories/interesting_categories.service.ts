@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
 import { CreateInterestingCategoryInput } from './dto/create-interesting_category.input';
 import { UpdateInterestingCategoryInput } from './dto/update-interesting_category.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { InterestingCategoryEntity } from './entities/interesting_category.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class InterestingCategoriesService {
-  create(createInterestingCategoryInput: CreateInterestingCategoryInput) {
-    return 'This action adds a new interestingCategory';
+  constructor(
+    @InjectRepository(InterestingCategoryEntity)
+    private readonly InterestingCategoryRepository: Repository<InterestingCategoryEntity>,
+  ) {}
+
+  async create(createInterestingCategoryInput: CreateInterestingCategoryInput) {
+    return await this.InterestingCategoryRepository.create({
+      ...createInterestingCategoryInput,
+    });
   }
 
-  findAll() {
-    return `This action returns all interestingCategories`;
+  async findAll() {
+    return await this.InterestingCategoryRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} interestingCategory`;
+  async findOne(id: number) {
+    return await this.InterestingCategoryRepository.findOneBy({ id });
   }
 
-  update(id: number, updateInterestingCategoryInput: UpdateInterestingCategoryInput) {
-    return `This action updates a #${id} interestingCategory`;
+  async update(
+    id: number,
+    updateInterestingCategoryInput: UpdateInterestingCategoryInput,
+  ) {
+    return await this.InterestingCategoryRepository.update(
+      { id },
+      { ...updateInterestingCategoryInput },
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} interestingCategory`;
+  async remove(id: number) {
+    return await this.InterestingCategoryRepository.delete({ id });
   }
 }
