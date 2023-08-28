@@ -15,7 +15,7 @@ export class InterestingCategorySelectService {
   async create(
     createInterestingCategorySelectInput: CreateInterestingCategorySelectInput,
   ) {
-    return await this.InterestingCategorySelectRepository.create({
+    return await this.InterestingCategorySelectRepository.save({
       ...createInterestingCategorySelectInput,
     });
   }

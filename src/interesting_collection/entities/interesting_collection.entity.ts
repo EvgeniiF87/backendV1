@@ -22,6 +22,10 @@ export class InterestingCollectionEntity {
   @Column({ default: 0 })
   views?: number;
 
+  @Field({ defaultValue: 0 })
+  @Column({ default: 0 })
+  priorities?: number;
+
   @Field(() => Date, { nullable: true })
   @Column({ type: 'timestamp', nullable: true })
   existTimeStart?: Date;

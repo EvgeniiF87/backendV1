@@ -23,8 +23,8 @@ export class InterestingCollectionResolver {
   @Query(() => [InterestingCollectionEntity], {
     name: 'interestingCollections',
   })
-  findAll() {
-    return this.interestingCollectionService.findAll();
+  findAll(@Args('catId', { type: () => Int, nullable: true }) catId?: number) {
+    return this.interestingCollectionService.findAllAndWhereCategoryID(catId);
   }
 
   @Query(() => InterestingCollectionEntity, { name: 'interestingCollection' })

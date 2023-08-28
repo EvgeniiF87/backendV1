@@ -3,7 +3,7 @@ import { CreateInterestingCollectionInput } from './dto/create-interesting_colle
 import { UpdateInterestingCollectionInput } from './dto/update-interesting_collection.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { InterestingCollectionEntity } from './entities/interesting_collection.entity';
-import { Repository } from 'typeorm';
+import { Raw, Repository } from 'typeorm';
 
 @Injectable()
 export class InterestingCollectionService {
@@ -15,18 +15,23 @@ export class InterestingCollectionService {
   async create(
     createInterestingCollectionInput: CreateInterestingCollectionInput,
   ) {
-    return await this.InterestingCollectionRepository.create({
+    return await this.InterestingCollectionRepository.save({
       ...createInterestingCollectionInput,
     });
   }
 
-  async findAll() {
+  async findAllAndWhereCategoryID(catId?: number) {
     return await this.InterestingCollectionRepository.find({
-      relations: {
-        collection: {
-          event: true,
-          place: true,
+      where: {
+        whenStartToShow: Raw((alias) => `${alias} > :date`, {
+          date: new Date().toISOString().substring(0, 10),
+        }),
+        category: {
+          categoryId: catId && catId,
         },
+      },
+      order: {
+        priorities: 'DESC',
       },
     });
   }

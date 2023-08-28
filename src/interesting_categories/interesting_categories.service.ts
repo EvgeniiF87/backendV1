@@ -13,7 +13,7 @@ export class InterestingCategoriesService {
   ) {}
 
   async create(createInterestingCategoryInput: CreateInterestingCategoryInput) {
-    return await this.InterestingCategoryRepository.create({
+    return this.InterestingCategoryRepository.save({
       ...createInterestingCategoryInput,
     });
   }
