@@ -3,6 +3,7 @@ import { InterestingCollectionService } from './interesting_collection.service';
 import { InterestingCollectionEntity } from './entities/interesting_collection.entity';
 import { CreateInterestingCollectionInput } from './dto/create-interesting_collection.input';
 import { UpdateInterestingCollectionInput } from './dto/update-interesting_collection.input';
+import InterestingCollectionsAndCount from './respons';
 
 @Resolver(() => InterestingCollectionEntity)
 export class InterestingCollectionResolver {
@@ -20,40 +21,79 @@ export class InterestingCollectionResolver {
     );
   }
 
-  @Query(() => [InterestingCollectionEntity], {
+  @Query(() => InterestingCollectionsAndCount, {
     name: 'interestingCollectionsCurrentDay',
   })
   findAllCurrentDay(
     @Args('catId', { type: () => Int, nullable: true }) catId?: number,
+    @Args('take', { type: () => Int, nullable: true }) take?: number,
+    @Args('skip', { type: () => Int, nullable: true }) skip?: number,
   ) {
-    return this.interestingCollectionService.findAllCurrentDay(catId);
+    const collections = this.interestingCollectionService.findAllCurrentDay(
+      catId,
+      take,
+      skip,
+    );
+
+    const count =
+      this.interestingCollectionService.findAllCurrentDayCount(catId);
+
+    return { collections, count };
   }
 
-  @Query(() => [InterestingCollectionEntity], {
+  @Query(() => InterestingCollectionsAndCount, {
     name: 'interestingCollectionsWeekend',
   })
   findAllWeekend(
     @Args('catId', { type: () => Int, nullable: true }) catId?: number,
+    @Args('take', { type: () => Int, nullable: true }) take?: number,
+    @Args('skip', { type: () => Int, nullable: true }) skip?: number,
   ) {
-    return this.interestingCollectionService.findAllWeekend(catId);
+    const count = this.interestingCollectionService.findAllWeekendCount(catId);
+    const collections = this.interestingCollectionService.findAllWeekend(
+      catId,
+      take,
+      skip,
+    );
+
+    return { collections, count };
   }
 
-  @Query(() => [InterestingCollectionEntity], {
+  @Query(() => InterestingCollectionsAndCount, {
     name: 'interestingCollectionsWeek',
   })
   findAllWeek(
     @Args('catId', { type: () => Int, nullable: true }) catId?: number,
+    @Args('take', { type: () => Int, nullable: true }) take?: number,
+    @Args('skip', { type: () => Int, nullable: true }) skip?: number,
   ) {
-    return this.interestingCollectionService.findAllWeek(catId);
+    const collections = this.interestingCollectionService.findAllWeek(
+      catId,
+      take,
+      skip,
+    );
+
+    const count = this.interestingCollectionService.findAllWeekCount(catId);
+
+    return { collections, count };
   }
 
-  @Query(() => [InterestingCollectionEntity], {
+  @Query(() => InterestingCollectionsAndCount, {
     name: 'interestingCollectionsMonth',
   })
   findAllMonth(
     @Args('catId', { type: () => Int, nullable: true }) catId?: number,
+    @Args('take', { type: () => Int, nullable: true }) take?: number,
+    @Args('skip', { type: () => Int, nullable: true }) skip?: number,
   ) {
-    return this.interestingCollectionService.findAllMonth(catId);
+    const collections = this.interestingCollectionService.findAllMonth(
+      catId,
+      take,
+      skip,
+    );
+    const count = this.interestingCollectionService.findAllMonthCount(catId);
+
+    return { collections, count };
   }
 
   @Query(() => InterestingCollectionEntity, { name: 'interestingCollection' })
