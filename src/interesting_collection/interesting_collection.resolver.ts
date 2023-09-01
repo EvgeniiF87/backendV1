@@ -21,10 +21,39 @@ export class InterestingCollectionResolver {
   }
 
   @Query(() => [InterestingCollectionEntity], {
-    name: 'interestingCollections',
+    name: 'interestingCollectionsCurrentDay',
   })
-  findAll(@Args('catId', { type: () => Int, nullable: true }) catId?: number) {
-    return this.interestingCollectionService.findAllAndWhereCategoryID(catId);
+  findAllCurrentDay(
+    @Args('catId', { type: () => Int, nullable: true }) catId?: number,
+  ) {
+    return this.interestingCollectionService.findAllCurrentDay(catId);
+  }
+
+  @Query(() => [InterestingCollectionEntity], {
+    name: 'interestingCollectionsWeekend',
+  })
+  findAllWeekend(
+    @Args('catId', { type: () => Int, nullable: true }) catId?: number,
+  ) {
+    return this.interestingCollectionService.findAllWeekend(catId);
+  }
+
+  @Query(() => [InterestingCollectionEntity], {
+    name: 'interestingCollectionsWeek',
+  })
+  findAllWeek(
+    @Args('catId', { type: () => Int, nullable: true }) catId?: number,
+  ) {
+    return this.interestingCollectionService.findAllWeek(catId);
+  }
+
+  @Query(() => [InterestingCollectionEntity], {
+    name: 'interestingCollectionsMonth',
+  })
+  findAllMonth(
+    @Args('catId', { type: () => Int, nullable: true }) catId?: number,
+  ) {
+    return this.interestingCollectionService.findAllMonth(catId);
   }
 
   @Query(() => InterestingCollectionEntity, { name: 'interestingCollection' })

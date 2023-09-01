@@ -32,14 +32,6 @@ export class InfoEntity {
   @Column({ nullable: true })
   time_to?: string;
 
-  @Field(() => Date, { nullable: true })
-  @Column({ type: 'timestamp', nullable: true })
-  existTimeStart?: Date;
-
-  @Field(() => Date, { nullable: true })
-  @Column({ type: 'timestamp', nullable: true })
-  existTimeEnd?: Date;
-
   @Field({ nullable: true })
   @Column({ nullable: true })
   phone?: string;

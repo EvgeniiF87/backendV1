@@ -9,10 +9,19 @@ export class CreateEventInput {
   @Field()
   desc: string;
 
-  @Field({ defaultValue: true })
+  @Field({ nullable: true })
+  preview?: string;
+
+  @Field({ defaultValue: true, nullable: true })
   publish?: boolean;
 
-  @Field({ defaultValue: false })
+  @Field(() => Date, { nullable: true })
+  existTimeStart?: Date;
+
+  @Field(() => Date, { nullable: true })
+  existTimeEnd?: Date;
+
+  @Field({ defaultValue: false, nullable: true })
   recommendation?: boolean;
 
   @Field(() => EventDirections)

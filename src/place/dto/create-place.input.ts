@@ -9,11 +9,17 @@ export class CreatePlaceInput {
   @Field()
   desc: string;
 
-  @Field()
-  preview: string;
+  @Field({ nullable: true })
+  preview?: string;
 
-  @Field({ defaultValue: true })
+  @Field({ defaultValue: true, nullable: true })
   publish?: boolean;
+
+  @Field(() => Date, { nullable: true })
+  existTimeStart?: Date;
+
+  @Field(() => Date, { nullable: true })
+  existTimeEnd?: Date;
 
   @Field(() => PlaceDirections)
   direction: PlaceDirections;

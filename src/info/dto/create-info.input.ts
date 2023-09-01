@@ -15,15 +15,9 @@ export class CreateInfoInput {
   time_to?: string;
 
   @Field({ nullable: true })
-  existTimeStart?: Date;
-
-  @Field({ nullable: true })
-  existTimeEnd?: Date;
-
-  @Field({ nullable: true })
   phone?: string;
 
-  @Field({ defaultValue: false })
+  @Field({ defaultValue: false, nullable: true })
   call_back?: boolean;
 
   @Field({ nullable: true })

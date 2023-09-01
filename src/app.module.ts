@@ -16,6 +16,7 @@ import { InterestingCollectionModule } from './interesting_collection/interestin
 import { InterestingCollectionSelectionsModule } from './interesting_collection_selections/interesting_collection_selections.module';
 import { InterestingCategoriesModule } from './interesting_categories/interesting_categories.module';
 import { InterestingCategorySelectModule } from './interesting_category_select/interesting_category_select.module';
+import { DateServiceModule } from './date-service/date-service.module';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { InterestingCategorySelectModule } from './interesting_category_select/i
     InterestingCollectionSelectionsModule,
     InterestingCategoriesModule,
     InterestingCategorySelectModule,
+    DateServiceModule,
   ],
 })
 export class AppModule {}

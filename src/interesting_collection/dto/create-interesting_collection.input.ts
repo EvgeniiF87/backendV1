@@ -8,7 +8,7 @@ export class CreateInterestingCollectionInput {
   @Field({ nullable: true })
   img?: string;
 
-  @Field({ defaultValue: 0 })
+  @Field({ defaultValue: 0, nullable: true })
   views?: number;
 
   @Field(() => Date, { nullable: true })
@@ -19,4 +19,7 @@ export class CreateInterestingCollectionInput {
 
   @Field(() => Date, { nullable: true })
   whenStartToShow?: Date;
+
+  @Field({ defaultValue: 0, nullable: true })
+  priorities?: number;
 }
