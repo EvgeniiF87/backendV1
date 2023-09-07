@@ -36,14 +36,6 @@ export class InterestingCollectionEntity {
 
   @Field(() => Date, { nullable: true })
   @Column({ type: 'timestamp', nullable: true })
-  dateStart?: Date;
-
-  @Field(() => Date, { nullable: true })
-  @Column({ type: 'timestamp', nullable: true })
-  dateEnd?: Date;
-
-  @Field(() => Date, { nullable: true })
-  @Column({ type: 'timestamp', nullable: true })
   whenStartToShow?: Date;
 
   @Field(() => [InterestingCollectionSelectionEntity])

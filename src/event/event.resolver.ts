@@ -29,6 +29,11 @@ export class EventResolver {
   }
 
   @Mutation(() => EventEntity)
+  updateEventViews(@Args('id', { type: () => Int }) id: number) {
+    return this.eventService.updateViews(id);
+  }
+
+  @Mutation(() => EventEntity)
   removeEvent(@Args('id', { type: () => Int }) id: number) {
     return this.eventService.remove(id);
   }

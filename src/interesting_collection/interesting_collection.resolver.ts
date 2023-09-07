@@ -22,76 +22,20 @@ export class InterestingCollectionResolver {
   }
 
   @Query(() => InterestingCollectionsAndCount, {
-    name: 'interestingCollectionsCurrentDay',
+    name: 'interestingCollections',
   })
-  findAllCurrentDay(
+  findAll(
     @Args('catId', { type: () => Int, nullable: true }) catId?: number,
     @Args('take', { type: () => Int, nullable: true }) take?: number,
     @Args('skip', { type: () => Int, nullable: true }) skip?: number,
   ) {
-    const collections = this.interestingCollectionService.findAllCurrentDay(
+    const collections = this.interestingCollectionService.findAll(
       catId,
       take,
       skip,
     );
 
-    const count =
-      this.interestingCollectionService.findAllCurrentDayCount(catId);
-
-    return { collections, count };
-  }
-
-  @Query(() => InterestingCollectionsAndCount, {
-    name: 'interestingCollectionsWeekend',
-  })
-  findAllWeekend(
-    @Args('catId', { type: () => Int, nullable: true }) catId?: number,
-    @Args('take', { type: () => Int, nullable: true }) take?: number,
-    @Args('skip', { type: () => Int, nullable: true }) skip?: number,
-  ) {
-    const count = this.interestingCollectionService.findAllWeekendCount(catId);
-    const collections = this.interestingCollectionService.findAllWeekend(
-      catId,
-      take,
-      skip,
-    );
-
-    return { collections, count };
-  }
-
-  @Query(() => InterestingCollectionsAndCount, {
-    name: 'interestingCollectionsWeek',
-  })
-  findAllWeek(
-    @Args('catId', { type: () => Int, nullable: true }) catId?: number,
-    @Args('take', { type: () => Int, nullable: true }) take?: number,
-    @Args('skip', { type: () => Int, nullable: true }) skip?: number,
-  ) {
-    const collections = this.interestingCollectionService.findAllWeek(
-      catId,
-      take,
-      skip,
-    );
-
-    const count = this.interestingCollectionService.findAllWeekCount(catId);
-
-    return { collections, count };
-  }
-
-  @Query(() => InterestingCollectionsAndCount, {
-    name: 'interestingCollectionsMonth',
-  })
-  findAllMonth(
-    @Args('catId', { type: () => Int, nullable: true }) catId?: number,
-    @Args('take', { type: () => Int, nullable: true }) take?: number,
-    @Args('skip', { type: () => Int, nullable: true }) skip?: number,
-  ) {
-    const collections = this.interestingCollectionService.findAllMonth(
-      catId,
-      take,
-      skip,
-    );
-    const count = this.interestingCollectionService.findAllMonthCount(catId);
+    const count = this.interestingCollectionService.findAllCount();
 
     return { collections, count };
   }

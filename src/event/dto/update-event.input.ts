@@ -5,7 +5,4 @@ import { InputType, Field, PartialType, ID } from '@nestjs/graphql';
 export class UpdateEventInput extends PartialType(CreateEventInput) {
   @Field(() => ID)
   id: number;
-
-  @Field()
-  views?: number;
 }

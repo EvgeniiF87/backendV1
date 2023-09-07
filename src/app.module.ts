@@ -16,15 +16,17 @@ import { InterestingCollectionModule } from './interesting_collection/interestin
 import { InterestingCollectionSelectionsModule } from './interesting_collection_selections/interesting_collection_selections.module';
 import { InterestingCategoriesModule } from './interesting_categories/interesting_categories.module';
 import { InterestingCategorySelectModule } from './interesting_category_select/interesting_category_select.module';
-import { DateServiceModule } from './date-service/date-service.module';
+import { join } from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
+      // autoSchemaFile: true,
+      // sortSchema: true,
       playground: true,
     }),
     TypeOrmModule.forRootAsync({
@@ -55,7 +57,6 @@ import { DateServiceModule } from './date-service/date-service.module';
     InterestingCollectionSelectionsModule,
     InterestingCategoriesModule,
     InterestingCategorySelectModule,
-    DateServiceModule,
   ],
 })
 export class AppModule {}

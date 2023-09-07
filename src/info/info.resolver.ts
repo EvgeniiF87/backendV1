@@ -13,7 +13,7 @@ export class InfoResolver {
     return this.infoService.create(createInfoInput);
   }
 
-  @Query(() => [InfoEntity], { name: 'info' })
+  @Query(() => [InfoEntity], { name: 'allInfo' })
   findAll() {
     return this.infoService.findAll();
   }

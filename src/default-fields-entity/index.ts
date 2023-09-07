@@ -1,6 +1,7 @@
-import { Field, ID, Int } from '@nestjs/graphql';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
+@ObjectType()
 export abstract class DefaultFieldsEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
@@ -37,12 +38,4 @@ export abstract class DefaultFieldsEntity {
   @Field(() => Date, { nullable: true })
   @Column({ type: 'timestamp', nullable: true })
   whenStartToShow?: Date;
-
-  @Field(() => Date, { nullable: true })
-  @Column({ type: 'timestamp', nullable: true })
-  dateStart?: Date;
-
-  @Field(() => Date, { nullable: true })
-  @Column({ type: 'timestamp', nullable: true })
-  dateEnd?: Date;
 }

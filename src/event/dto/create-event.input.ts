@@ -21,6 +21,9 @@ export class CreateEventInput {
   @Field(() => Date, { nullable: true })
   existTimeEnd?: Date;
 
+  @Field(() => Date, { nullable: true })
+  whenStartToShow?: Date;
+
   @Field({ defaultValue: false, nullable: true })
   recommendation?: boolean;
 

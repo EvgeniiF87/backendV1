@@ -15,18 +15,14 @@ export class EventService {
 
   async create(createEventInput: CreateEventInput) {
     const preview = `${uuidV4()}.jpeg`;
-    return await this.EventRepository.save({ ...createEventInput, preview });
+    return await this.EventRepository.save({
+      ...createEventInput,
+      preview,
+    });
   }
 
   async findAll() {
-    return await this.EventRepository.find({
-      relations: {
-        images: true,
-        info: true,
-        tags: { tags: true },
-        costOption: { costOption: true },
-      },
-    });
+    return await this.EventRepository.find();
   }
 
   async findOne(id: number) {
@@ -43,6 +39,14 @@ export class EventService {
 
   async update(id: number, updateEventInput: UpdateEventInput) {
     return await this.EventRepository.update({ id }, { ...updateEventInput });
+  }
+
+  async updateViews(id: number) {
+    const event = await this.EventRepository.findOneBy({ id });
+    return await this.EventRepository.update(
+      { id },
+      { views: event.views + 1 },
+    );
   }
 
   async remove(id: number) {
